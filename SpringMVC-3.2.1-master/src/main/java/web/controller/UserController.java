@@ -17,11 +17,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @Autowired
-//    public void setUserService(UserServiceImpl userService) {
-//        this.userService = userService;
-//    }
-
     @GetMapping(value = "/")
     public String getHomePage() {
         return "index";
