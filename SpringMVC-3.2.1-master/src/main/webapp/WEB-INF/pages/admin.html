@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>USERS CRUD</title>
+</head>
+<body>
+
+<div align="center">
+    <h1 sec:authentication="name"></h1>
+    <div sec:authorize="isAuthenticated()">
+        <p>Ваш логин:
+            <sec:authentication property="principal.username"/>
+        </p>
+        <p><a class="btn btn-lg btn-danger" th:href="@{/logout}" role="button">Выйти</a></p>
+        <div/>
+        <h2>Users</h2>
+
+
+        <table style="border: 3px solid black">
+            <tbody>
+            <tr style="border: 2px solid black">
+                <th style="border: 1px solid gray">id</th>
+                <th style="border: 1px solid #808080">name</th>
+                <th style="border: 1px solid gray">password</th>
+                <th style="border: 1px solid gray">age</th>
+                <th style="border: 1px solid gray">roles</th>
+                <th style="border: 1px solid gray">action</th>
+            </tr>
+            <th:block th:each="user : ${users}">
+                <tr style="border: 2px solid black">
+                    <td style="border: 1px solid gray" th:text="${user.id}"/>
+                    <td style="border: 1px solid gray" th:text="${user.name}"/>
+                    <td style="border: 1px solid gray" th:text="${user.password}"/>
+                    <td style="border: 1px solid gray" th:text="${user.age}"/>
+                    <td style="border: 1px solid gray" th:text="${user.roles}"/>
+                    <td style="border: 1px solid gray">
+                        <a th:href="@{admin/edit/{userId}(userId = ${user.id})}">edit</a>
+                        <a th:href="@{admin/delete/{userId}(userId = ${user.id})}">delete</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+
+        <h2>Add</h2>
+        <a th:href="@{admin/add}">Add new User</a>
+    </div>
+</div>
+
+
+</body>
+</html>
