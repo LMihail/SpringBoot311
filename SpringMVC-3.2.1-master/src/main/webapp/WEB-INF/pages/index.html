@@ -9,7 +9,7 @@
 
 <div align="center">
 
-    <h1>Welcome my Admin APP</h1>
+    <h1>Привет, необходима авторизация:</h1>
 
     <div sec:authorize="!isAuthenticated()">
         <p><a class="btn btn-lg btn-success" th:href="@{/login}" role="button">Войти</a></p>

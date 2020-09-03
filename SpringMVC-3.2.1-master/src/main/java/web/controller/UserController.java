@@ -21,7 +21,6 @@ public class UserController {
 
     @GetMapping(value = "/")
     public String getHomePage() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());          //для проверки в консоли
         return "index";
     }
 
@@ -31,7 +30,7 @@ public class UserController {
         return "login";
     }
 
-    //список юзеров
+    //страница админа
     @GetMapping(value = "/admin")
     public ModelAndView allUsers(){
         ModelAndView modelAndView = new ModelAndView();
@@ -41,41 +40,48 @@ public class UserController {
     }
 
     //удаление
-    @GetMapping("/delete/{id}")
-    public String removeUser(@PathVariable("id") int id) {
-        userService.removeUser(id);
-        return "admin";
-    }
-
-    //изменение
-    @GetMapping("edit/{id}")
-    public ModelAndView editPage(@PathVariable("id") int id){
+    @GetMapping("/admin/delete/{id}")
+    public ModelAndView deleteUser(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("edit");
-        modelAndView.addObject("user", userService.getUserById(id));
+        userService.delete(id);
+        modelAndView.setViewName("redirect:/admin");
         return modelAndView;
     }
 
-    @PostMapping("/edit")
+    //изменение
+    @GetMapping("/admin/edit/{id}")
+    public ModelAndView editPage(@PathVariable("id") int id){
+        User user = userService.getUserById(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("edit");
+        modelAndView.addObject("user", user);
+        return modelAndView;
+    }
+
+    @PostMapping("/admin/edit")
     public ModelAndView editUser(@ModelAttribute("user") User user){
         user.setRoles(userService.getUserById(user.getId()).getRoles());
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin");
+        modelAndView.setViewName("redirect:/admin");
         userService.saveUser(user);
         return modelAndView;
     }
 
     //добавление
-    @GetMapping("/add/")
-    public String addUser(Model model) {
-        model.addAttribute("user", new User());
-        return "add";
+    @GetMapping("/admin/add")
+    public ModelAndView addUser() {
+        ModelAndView  modelAndView = new ModelAndView();
+        modelAndView.setViewName("add");
+        modelAndView.addObject("user",new User());
+        return modelAndView;
     }
 
-    @PostMapping("/add")
-    public String addUser(@ModelAttribute("user") User user) {
+    @PostMapping("/admin/add")
+    public ModelAndView addUser(@ModelAttribute("user") User user) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin");
         userService.saveUser(user);
-        return "admin";
+        return modelAndView;
     }
     @GetMapping("/user")
     public String userPage(){

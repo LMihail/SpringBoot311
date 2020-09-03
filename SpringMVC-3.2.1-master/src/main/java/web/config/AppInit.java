@@ -2,9 +2,7 @@ package web.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-//@Order(1)
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
-
 
     @Override
     protected Class<?>[] getRootConfigClasses() {

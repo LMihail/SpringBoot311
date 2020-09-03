@@ -51,4 +51,8 @@ public class UserDaoImpl implements UserDao{
                 .findFirst()
                 .orElse(null);
     }
+
+    public void delete(int id) {
+        rep.deleteById(id);
+    }
 }

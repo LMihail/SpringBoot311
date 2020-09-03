@@ -9,7 +9,7 @@
 <div align="center">
     <h1 sec:authentication="name"></h1>
     <div sec:authorize="isAuthenticated()">
-        <p>Ваш логин:
+        <p>Вы зашли как админ админ:
             <sec:authentication property="principal.username"/>
         </p>
         <p><a class="btn btn-lg btn-danger" th:href="@{/logout}" role="button">Выйти</a></p>

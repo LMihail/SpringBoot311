@@ -21,11 +21,6 @@ import java.util.*;
 @Transactional
 public class UserServiceImpl implements UserDetailsService {
 
-//    @Autowired
-//    UserRep rep;
-//    @Autowired
-//    RoleRep roleRep;
-
     @Autowired
     UserDaoImpl userDao;
 
@@ -49,43 +44,7 @@ public class UserServiceImpl implements UserDetailsService {
         return userDao.loadUserByUsername(name);
     }
 
-//    @Transactional
-//    public void saveUser(User user) {
-//        Set<Role> roles = user.getRoles();
-//        if (roles == null) {
-//            roles = new HashSet<>();
-//            roles.add(roleRep.findById(1L).get());
-//            user.setRoles(roles);
-//        }
-//        rep.save(user);
-//    }
-//
-//    @Transactional
-//    public void removeUser(int id) {
-//        if (rep.findById(id).isPresent()) {
-//            rep.deleteById(id);
-//        }
-//    }
-//
-//    @Transactional
-//    public User getUserById(int id) {
-//        Optional<User> userFromDb = rep.findById(id);
-//        return userFromDb.orElse(new User());
-//    }
-//
-//    @Transactional
-//    public List<User> listUser() {
-//        return (List<User>) rep.findAll();
-//    }
-//
-//    @Override
-//    @Transactional
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//        return listUser().stream()
-//                .filter(a -> username.equals(a.getName()))
-//                .findFirst()
-//                .orElse(null);
-//    }
-
+    public void delete(int id) {
+        userDao.delete(id);
+    }
 }
