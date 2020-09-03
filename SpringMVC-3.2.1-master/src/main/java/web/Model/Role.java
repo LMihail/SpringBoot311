@@ -12,7 +12,7 @@ public class Role implements GrantedAuthority {
     private Long id;
     @Column(name = "name")
     private String name;
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles", cascade = CascadeType.ALL)
     private Set<User> users;
 
     public String getName() {
@@ -42,5 +42,10 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return getName();
+    }
+
+    @Override
+    public String toString() {
+        return name + " ";
     }
 }

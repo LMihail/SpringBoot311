@@ -5,7 +5,4 @@ import web.Model.User;
 
 
 public interface UserRep extends CrudRepository<User, Integer> {
-
-    public User findUserByName(String name);
-
 }

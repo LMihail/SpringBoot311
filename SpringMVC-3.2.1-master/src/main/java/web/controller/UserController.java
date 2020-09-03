@@ -1,13 +1,15 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 import web.Model.User;
-import web.service.UserService;
+
+import web.service.UserServiceImpl;
 
 import java.util.List;
 
@@ -15,10 +17,11 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @GetMapping(value = "/")
     public String getHomePage() {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());          //для проверки в консоли
         return "index";
     }
 
@@ -31,10 +34,9 @@ public class UserController {
     //список юзеров
     @GetMapping(value = "/admin")
     public ModelAndView allUsers(){
-        List<User> users = userService.listUser();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin");
-        modelAndView.addObject("users",users);
+        modelAndView.addObject("users",userService.listUser());
         return modelAndView;
     }
 
@@ -48,10 +50,9 @@ public class UserController {
     //изменение
     @GetMapping("edit/{id}")
     public ModelAndView editPage(@PathVariable("id") int id){
-        User user = userService.getUserById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("edit");
-        modelAndView.addObject("user", user);
+        modelAndView.addObject("user", userService.getUserById(id));
         return modelAndView;
     }
 

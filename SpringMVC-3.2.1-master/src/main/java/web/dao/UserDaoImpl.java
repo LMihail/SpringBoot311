@@ -46,6 +46,9 @@ public class UserDaoImpl implements UserDao{
     }
 
     public User loadUserByUsername(String name) {
-        return rep.findUserByName(name);
+        return listUser().stream()
+                .filter(a -> name.equals(a.getName()))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -11,23 +11,22 @@ import java.util.Set;
 @Table(name = "USERS")
 public class User implements UserDetails {
     @Id
-    @Column(name = "ID")
+//    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "NAME")
+//    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "AGE")
+//    @Column(name = "AGE")
     private int age;
 
-    @Column(name = "PASSWORD")
+//    @Column(name = "PASSWORD")
     private String password;
 
-    @Transient
-    private String confirmPassword;
+//    @Transient
+//    private String confirmPassword;
 
-    @Column(name = "ROLE")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -74,7 +73,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return getRoles();
     }
 
     @Override
