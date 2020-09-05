@@ -1,9 +1,7 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -11,7 +9,6 @@ import web.Model.User;
 
 import web.service.UserServiceImpl;
 
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -32,16 +29,16 @@ public class UserController {
 
     //страница админа
     @GetMapping(value = "/admin")
-    public ModelAndView allUsers(){
+    public ModelAndView allUsers() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin");
-        modelAndView.addObject("users",userService.listUser());
+        modelAndView.addObject("users", userService.listUser());
         return modelAndView;
     }
 
     //удаление
     @GetMapping("/admin/delete/{id}")
-    public ModelAndView deleteUser(@PathVariable("id") int id){
+    public ModelAndView deleteUser(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         userService.delete(id);
         modelAndView.setViewName("redirect:/admin");
@@ -50,7 +47,7 @@ public class UserController {
 
     //изменение
     @GetMapping("/admin/edit/{id}")
-    public ModelAndView editPage(@PathVariable("id") int id){
+    public ModelAndView editPage(@PathVariable("id") int id) {
         User user = userService.getUserById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("edit");
@@ -59,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/edit")
-    public ModelAndView editUser(@ModelAttribute("user") User user){
+    public ModelAndView editUser(@ModelAttribute("user") User user) {
         user.setRoles(userService.getUserById(user.getId()).getRoles());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/admin");
@@ -70,9 +67,9 @@ public class UserController {
     //добавление
     @GetMapping("/admin/add")
     public ModelAndView addUser() {
-        ModelAndView  modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("add");
-        modelAndView.addObject("user",new User());
+        modelAndView.addObject("user", new User());
         return modelAndView;
     }
 
@@ -83,8 +80,9 @@ public class UserController {
         userService.saveUser(user);
         return modelAndView;
     }
+
     @GetMapping("/user")
-    public String userPage(){
+    public String userPage() {
         return "user";
     }
 }
