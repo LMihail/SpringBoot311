@@ -15,7 +15,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/SpringMVC-3.2.1-master/target/SpringMVC-3.2.1/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/SpringBoot311/target/SpringMVC-3.2.1/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="SpringBoot311/web/Web" />
     </root>
