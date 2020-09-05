@@ -11,13 +11,13 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="SpringMVC-3.2.1" />
+          <element id="module-output" name="SpringBoot311" />
         </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/SpringMVC-3.2.1-master/target/SpringMVC-3.2.1/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="SpringMVC-3.2.1/web/Web" />
+      <element id="javaee-facet-resources" facet="SpringBoot311/web/Web" />
     </root>
   </artifact>
 </component>
